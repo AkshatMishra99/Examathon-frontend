@@ -1,0 +1,13 @@
+.login-form form {
+    padding: 10px;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.login-form h4 {
+    color: #6c757d;
+    margin: 5px 10px auto;
+}
+.login-form .form-error {
+    color: red;
+}

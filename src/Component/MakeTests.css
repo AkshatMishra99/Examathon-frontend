@@ -1,0 +1,16 @@
+.make-tests {
+    padding: 20px;
+    z-index: 0;
+}
+.form-control {
+    margin: 5px;
+}
+.make-tests-container {
+    z-index: 0;
+    padding: 10px;
+    border: 1px solid rgba(48, 55, 65, 0.3);
+}
+.test-add-item {
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(48, 55, 65, 0.3);
+}
