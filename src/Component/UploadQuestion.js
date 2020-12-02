@@ -113,6 +113,7 @@ function UploadQuestion({ stuClass, subJ, submit, paper }) {
                         id="inputAddress"
                         placeholder="Option or Answer"
                         onChange={setCorrAnsHandle}
+                        required
                     />
                 </div>
                 <button

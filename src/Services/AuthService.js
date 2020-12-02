@@ -42,4 +42,7 @@ export default {
                 };
         });
     },
+    pullData: () => {
+        return fetch("");
+    },
 };

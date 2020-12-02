@@ -12,7 +12,7 @@ function Register(props) {
         firstName: "",
         lastName: "",
         phoneNumber: "",
-        role: "user",
+        role: "admin",
     });
     let [message, setMessage] = useState(null);
     console.log(user);

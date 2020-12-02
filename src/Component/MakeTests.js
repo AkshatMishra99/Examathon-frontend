@@ -7,8 +7,7 @@ function MakeTests() {
     let { tests, setTests } = useContext(AuthContext);
     let history = useHistory();
     let [classCurr, setClassCurr] = useState("1");
-    let [subjectArray, setSubjectArray] = useState(tests.classes["1"]);
-    let [sub, setSub] = useState("maths");
+    let [paperTitle, setPaperTitle] = useState("");
     let [noOfQues, setNoOfQues] = useState(0);
     let [makingTest, setMakingTest] = useState(false);
     let [examDur, setExamDur] = useState(0);
@@ -16,26 +15,26 @@ function MakeTests() {
     let [paper, setPaper] = useState();
     let [bifur, setBifur] = useState(false);
     let [streams, setStreams] = useState({});
-    let selectClass = (e) => {
-        setClassCurr(e.target.value);
-        if (parseInt(e.target.value) > 8) {
-            setBifur(true);
-            setStreams({ ...tests.classes[e.target.value].streams });
-        }
-        setSubjectArray(tests.classes[e.target.value]);
-    };
-    let TestList = [];
-    console.log(subjectArray);
-    let subjects = [];
-    for (let i in subjectArray) {
-        if (i !== "streams") subjects.push(<option>{i}</option>);
-        else {
-        }
-    }
-    let selectSubject = (e) => {
-        setSub(e.target.value);
-        console.log(e.target.value);
-    };
+    // let selectClass = (e) => {
+    //     setClassCurr(e.target.value);
+    //     if (parseInt(e.target.value) > 8) {
+    //         setBifur(true);
+    //         setStreams({ ...tests.classes[e.target.value].streams });
+    //     }
+    //     setSubjectArray(tests.classes[e.target.value]);
+    // };
+    // let TestList = [];
+    // console.log(subjectArray);
+    // let subjects = [];
+    // for (let i in subjectArray) {
+    //     if (i !== "streams") subjects.push(<option>{i}</option>);
+    //     else {
+    //     }
+    // }
+    // let selectSubject = (e) => {
+    //     setSub(e.target.value);
+    //     console.log(e.target.value);
+    // };
     let setQuestions = (e) => {
         setNoOfQues(parseInt(e.target.value));
     };
@@ -52,9 +51,10 @@ function MakeTests() {
             "total questions": noOfQues,
             "exam duration": examDur,
             "maximum marks": examMaxMarks,
-            "scheduled on": "12/10/2020",
+            "scheduled on": "12/10/2020 00:00:00",
             "negative marking": false,
             questionList: [],
+            paperTitle,
         };
         console.log(tempPaper);
         setPaper(tempPaper);
@@ -63,13 +63,19 @@ function MakeTests() {
     let submitForm = (e) => {
         if (paper.questionList.length === noOfQues) {
             //submitting form in context api and in the data base
+            console.log(paper);
+            console.log(tests);
+            let tempTests = { ...tests };
+            tempTests.papers.push(paper);
+            setTests(tempTests);
         }
+        history.push("/");
     };
     let resetForm = (e) => {
-        history.replace("/dashboard");
+        history.push("/");
     };
     console.log(paper);
-    console.log(sub);
+
     return makingTest ? (
         <div className="make-tests">
             <ul
@@ -83,7 +89,7 @@ function MakeTests() {
                             <div>Question {i + 1}</div>
                             <TestAdd
                                 stuClass={classCurr}
-                                subJ={sub}
+                                subJ={paperTitle}
                                 ind={i + 1}
                                 paper={{ ...paper }}
                             />
@@ -102,11 +108,13 @@ function MakeTests() {
             <h2>Make Your Tests Here </h2>
             <form className="container" onSubmit={submitHandler}>
                 <div className="form-group form-inline">
-                    <label for="classes">Select Class:</label>
+                    <label htmlFor="classes">Select Class:</label>
                     <select
                         className="form-control"
                         id="classes"
-                        onChange={selectClass}
+                        onChange={(e) => {
+                            setClassCurr(e.target.value);
+                        }}
                     >
                         {Array(13)
                             .fill()
@@ -116,17 +124,20 @@ function MakeTests() {
                     </select>
                 </div>
                 <div className="form-group form-inline">
-                    <label for="subjects">Select subject:</label>
-                    <select
+                    <label htmlFor="subjects">Select subject:</label>
+                    <input
+                        type="text"
                         className="form-control"
-                        id="subjects"
-                        onChange={selectSubject}
-                    >
-                        {subjects}
-                    </select>
+                        id="subject"
+                        placeholder="Enter Paper Title"
+                        onChange={(e) => {
+                            setPaperTitle(e.target.value);
+                        }}
+                        required
+                    ></input>
                 </div>
                 <div className="form-group form-inline">
-                    <label for="questions">Enter Maximum Marks</label>
+                    <label htmlFor="questions">Enter Maximum Marks</label>
                     <input
                         type="text"
                         className="form-control"
@@ -137,7 +148,9 @@ function MakeTests() {
                     ></input>
                 </div>
                 <div className="form-group form-inline">
-                    <label for="questions">Enter Exam Duration in mins:</label>
+                    <label htmlFor="questions">
+                        Enter Exam Duration in mins:
+                    </label>
                     <input
                         type="text"
                         className="form-control"
@@ -148,7 +161,9 @@ function MakeTests() {
                     ></input>
                 </div>
                 <div className="form-group form-inline">
-                    <label for="questions">Enter Number of Questions:</label>
+                    <label htmlFor="questions">
+                        Enter Number of Questions:
+                    </label>
                     <input
                         type="text"
                         className="form-control"

@@ -11,6 +11,7 @@ import ViewTests from "./ViewTests";
 
 function Dashboard() {
     const history = useHistory();
+
     const {
         user,
         setUser,
@@ -125,7 +126,7 @@ function Dashboard() {
                                 aria-expanded="false"
                                 style={{
                                     padding: "0",
-                                    "text-decoration": "none",
+                                    textDecoration: "none",
                                 }}
                             >
                                 <FontAwesomeIcon
