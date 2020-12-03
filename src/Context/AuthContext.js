@@ -142,7 +142,24 @@ export default ({ children }) => {
         //         },
         //     },
         // },
-        papers: [],
+        papers: [
+            {
+                "paper title": "Maths",
+                "scheduled on": "12/10/2020 00:00:00",
+                "total questions": 1,
+                "exam duration": "30",
+                "maximum marks": "100",
+                "negative marking": "NO",
+            },
+            {
+                "paper title": "Maths",
+                "scheduled on": "12/10/2020 00:00:00",
+                "total questions": 1,
+                "exam duration": "30",
+                "maximum marks": "100",
+                "negative marking": "NO",
+            },
+        ],
         students: [],
     });
     useEffect(() => {

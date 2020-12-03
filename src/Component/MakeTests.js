@@ -48,13 +48,13 @@ function MakeTests() {
     let submitHandler = (e) => {
         e.preventDefault();
         tempPaper = {
+            paperTitle,
+            "scheduled on": "12/10/2020 00:00:00",
             "total questions": noOfQues,
             "exam duration": examDur,
             "maximum marks": examMaxMarks,
-            "scheduled on": "12/10/2020 00:00:00",
             "negative marking": false,
             questionList: [],
-            paperTitle,
         };
         console.log(tempPaper);
         setPaper(tempPaper);
